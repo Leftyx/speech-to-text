@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Speech to text in the browser — test page</title>
+  <script type="module" src="/src/pages/orukeet/main.ts"></script>
+</head>
+<body>
+  <main>
+    <h1>Speech-to-text test</h1>
+    <p class="sub">Runs fully in this browser. Speak, pause, and each phrase appears below.</p>
+    <p class="version">Page version 2026-09-29 (TypeScript, Vite)</p>
+
+    <p class="edge-warning" role="note">
+      <strong>If you use Microsoft Edge, turn off Enhanced security for this site.</strong>
+      Else the model loads and transcribes very slowly, and the page looks stuck.
+      Click the lock icon at the left of the address bar, turn off
+      "Enhanced security for this site", then reload the page.
+    </p>
+
+    <model-picker></model-picker>
+    <p id="language-row" class="language-picker" hidden>
+      <label for="language">Language</label>
+      <select id="language">
+        <option value="">Detect</option>
+        <option value="en">English</option>
+        <option value="fr">French</option>
+        <option value="de">German</option>
+        <option value="it">Italian</option>
+      </select>
+    </p>
+    <status-banner>Getting the model. The first time it is downloaded…</status-banner>
+    <record-controls></record-controls>
+    <p id="waiting" class="waiting" aria-live="polite"></p>
+    <transcript-list></transcript-list>
+
+    <section class="pages">
+      <h2>Pages</h2>
+      <dl>
+        <dt><a href="./">This page: sherpa-onnx engine</a></dt>
+        <dd>
+          Orukeet, Whisper small or Whisper medium, chosen above. Cuts speech
+          at pauses and transcribes each phrase on its own. Keeps the model in
+          browser storage, so it is downloaded once.
+        </dd>
+
+        <dt><a href="parakeet.html">Parakeet on the processor</a></dt>
+        <dd>
+          The same Parakeet model in 4-bit form, 410 MB, run by parakeet.js on
+          ONNX Runtime Web, on the processor. This is the real test: many
+          phones have no WebGPU. Each phrase is transcribed when you pause.
+        </dd>
+
+        <dt><a href="parakeet.html?backend=webgpu">Parakeet on WebGPU</a></dt>
+        <dd>
+          The same 4-bit model, 410 MB, with the encoder on the graphics card.
+          For comparison only.
+        </dd>
+      </dl>
+    </section>
+  </main>
+</body>
+</html>

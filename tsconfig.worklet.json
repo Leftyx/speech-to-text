@@ -1,0 +1,11 @@
+{
+  // The AudioWorklet runs on the browser's audio thread, which has neither the
+  // DOM nor the worker globals.
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2024"],
+    "types": ["audioworklet"],
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.worklet.tsbuildinfo"
+  },
+  "include": ["src/audio/*.worklet.ts", "src/shared/audio-protocol.ts", "src/shared/typed-channel.ts"]
+}

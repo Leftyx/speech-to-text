@@ -1,0 +1,20 @@
+{
+  // Build scripts and tool configs. Node runs them as .ts directly.
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2024"],
+    "types": ["node"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo"
+  },
+  "include": [
+    "scripts",
+    "vite.config.ts",
+    "eslint.config.ts",
+    "src/shared/manifest.ts",
+    "src/shared/trace.ts",
+    "src/shared/errors.ts",
+    "cloudflare/cross-origin.ts"
+  ]
+}

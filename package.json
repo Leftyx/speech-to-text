@@ -1,0 +1,44 @@
+{
+  "name": "orukeet-web-demo",
+  "private": true,
+  "type": "module",
+  "description": "Browser speech-to-text test pages: sherpa-onnx (Orukeet, Whisper) and Parakeet on ONNX Runtime Web.",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "assets": "node scripts/assets.ts",
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "node scripts/serve.ts",
+    "transcribe": "vite build --logLevel warn && node scripts/transcribe.ts",
+    "typecheck": "tsc -b",
+    "lint": "eslint .",
+    "deploy": "npm run build && wrangler deploy"
+  },
+  "dependencies": {
+    "onnxruntime-web": "1.30.0",
+    "parakeet.js": "github:ysdede/parakeet.js#c346fd04888272b05ed820896df0b188e92463b9"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260923.1",
+    "@eslint/js": "^10.0.1",
+    "@types/audioworklet": "^0.0.100",
+    "@types/node": "^24.13.6",
+    "eslint": "^10.11.0",
+    "globals": "^17.12.0",
+    "jiti": "^2.7.0",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.70.1",
+    "vite": "^8.3.0",
+    "wrangler": "^4.143.0"
+  },
+  "overrides": {
+    "parakeet.js": {
+      "onnxruntime-web": "$onnxruntime-web"
+    }
+  },
+  "allowScripts": {
+    "protobufjs@7.6.6": true
+  }
+}

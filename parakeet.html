@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parakeet — test page</title>
+  <script type="module" src="/src/pages/parakeet/main.ts"></script>
+</head>
+<body>
+  <main>
+    <h1 id="heading">Parakeet</h1>
+    <p class="sub">
+      A separate experiment: the same Parakeet TDT v3 in 4-bit form, run by
+      parakeet.js on ONNX Runtime Web. It shares no speech engine code with
+      the main page.
+    </p>
+    <p class="version">
+      Press Start and speak. Each phrase is transcribed when you pause.
+      <a href="parakeet.html?backend=wasm">Run on the processor</a> ·
+      <a href="parakeet.html?backend=webgpu">Run on WebGPU</a> ·
+      <a href="./">Back to the main test page</a>
+    </p>
+
+    <p class="edge-warning" role="note">
+      <strong>If you use Microsoft Edge, turn off Enhanced security for this site.</strong>
+      Else the model loads and transcribes very slowly, and the page looks stuck.
+      Click the lock icon at the left of the address bar, turn off
+      "Enhanced security for this site", then reload the page.
+    </p>
+
+    <p><span id="backend" class="badge">backend: asking the browser…</span></p>
+    <model-picker></model-picker>
+    <status-banner>Loading the model (about 410 MB the first time)…</status-banner>
+    <record-controls class="spaced"></record-controls>
+    <p id="waiting" class="waiting" aria-live="polite"></p>
+    <transcript-list></transcript-list>
+  </main>
+</body>
+</html>

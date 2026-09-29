@@ -1,0 +1,10 @@
+{
+  // Page code: runs on the main thread, with the DOM.
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2024", "DOM", "DOM.Iterable"],
+    "types": ["vite/client"],
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo"
+  },
+  "include": ["src/pages", "src/ui", "src/audio/microphone.ts", "src/shared"]
+}

@@ -1,0 +1,168 @@
+/* Shared by both pages. Components are in light DOM, so their rules live here. */
+
+@layer base, components, page;
+
+@layer base {
+  :root {
+    --ink: #1d2733;
+    --muted: #5b6878;
+    --paper: #f6f8fa;
+    --card: #fff;
+    --line: #d5dce3;
+    --go: #1f6f5c;
+    --stop: #a3322b;
+    --radius: 6px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  /* Phones: keep the text size when the phone turns to landscape. */
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font: 17px/1.55 "Segoe UI", system-ui, -apple-system, sans-serif;
+    /* A long word or link must not make a narrow screen scroll sideways. */
+    overflow-wrap: break-word;
+  }
+
+  main { max-width: 46rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  /* Tighter lines, because the title wraps on a phone. */
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 .25rem; }
+  a { color: var(--go); }
+
+  button, select { font: inherit; }
+
+  button {
+    padding: .6rem 1.4rem;
+    border: 0;
+    border-radius: var(--radius);
+    color: #fff;
+    cursor: pointer;
+
+    &:disabled { opacity: .4; cursor: not-allowed; }
+    &:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+  }
+
+  .sub { color: var(--muted); margin: 0; }
+  .version {
+    color: var(--muted);
+    font-size: .8rem;
+    margin: .25rem 0 1.5rem;
+
+    & a { color: var(--muted); }
+  }
+}
+
+@layer components {
+  status-banner {
+    display: block;
+    padding: .75rem 1rem;
+    border-left: 4px solid var(--go);
+    background: var(--card);
+    margin-bottom: 1rem;
+
+    &:state(error) { border-left-color: var(--stop); color: var(--stop); }
+  }
+
+  record-controls {
+    display: flex;
+    gap: .75rem;
+    align-items: center;
+    flex-wrap: wrap;
+
+    & .start { background: var(--go); }
+    & .stop { background: var(--stop); }
+    & .live { color: var(--go); font-weight: 600; min-height: 1.5em; }
+  }
+
+  /* index.html has a language drop-down for Whisper that looks the same. */
+  model-picker, .language-picker {
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    margin: 0 0 1rem;
+
+    /* display: flex would show the row even when it is hidden. */
+    &[hidden] { display: none; }
+    & label { color: var(--muted); font-size: .9rem; }
+
+    & select {
+      padding: .45rem .6rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--card);
+      color: var(--ink);
+      max-width: 100%;
+      /* Lets a long model name shrink to fit a narrow screen. */
+      min-width: 0;
+
+      &:disabled { opacity: .5; }
+    }
+  }
+
+  transcript-list {
+    display: block;
+    margin-top: 1.5rem;
+
+    & ol {
+      margin: 0;
+      padding: 0 0 0 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      min-height: 6rem;
+    }
+
+    & li {
+      padding: .6rem .75rem .6rem .25rem;
+      border-bottom: 1px solid var(--line);
+
+      &:last-child { border-bottom: 0; }
+      &.error { color: var(--stop); }
+    }
+
+    & small { display: block; color: var(--muted); font-size: .8rem; }
+  }
+}
+
+@layer page {
+  .spaced { margin-top: 1rem; }
+
+  /* parakeet.html: which backend runs the model. */
+  .badge {
+    display: inline-block;
+    padding: .15rem .5rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--card);
+    font-size: .85rem;
+    color: var(--muted);
+  }
+
+  /* Both pages: Edge's Enhanced security turns off the WebAssembly compiler, so speech runs very slowly. */
+  .edge-warning {
+    margin: 0 0 1rem;
+    padding: .75rem 1rem;
+    border-left: 4px solid #d4a017;
+    background: #fff6d1;
+    color: #5c4400;
+  }
+
+  /* index.html: how many phrases wait to be transcribed. */
+  .waiting { color: var(--muted); margin: .75rem 0 0; min-height: 1.5em; }
+
+  /* index.html: links to the other pages. */
+  .pages {
+    margin: 2rem 0 0;
+    border-top: 1px solid var(--line);
+    padding-top: 1rem;
+
+    & h2 { font-size: 1rem; margin: 0 0 .5rem; }
+    & dl { margin: 0; }
+    & dt { margin-top: .6rem; }
+    & dd { margin: 0; color: var(--muted); font-size: .9rem; }
+  }
+}

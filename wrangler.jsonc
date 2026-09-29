@@ -1,0 +1,13 @@
+{
+  // The test site on Cloudflare. See "Put it on the internet" in README.md.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "orukeet-web",
+  "main": "cloudflare/worker.ts",
+  "compatibility_date": "2026-09-01",
+  // Built by `npm run build`. Files found here never reach the Worker.
+  "assets": { "directory": "./dist" },
+  // Engine and model files, uploaded by hand. The Worker serves them.
+  "r2_buckets": [{ "binding": "FILES", "bucket_name": "orukeet-web-files" }],
+  "workers_dev": true,
+  "preview_urls": false
+}

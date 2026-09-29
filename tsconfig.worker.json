@@ -1,0 +1,11 @@
+{
+  // The Parakeet worker and the service worker: no DOM, WebWorker globals
+  // instead. The engine worker is in tsconfig.engine.json.
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2024", "WebWorker"],
+    "types": ["vite/client"],
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.worker.tsbuildinfo"
+  },
+  "include": ["src/workers/parakeet", "src/workers/common", "src/workers/offline", "src/shared"]
+}
